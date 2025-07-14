@@ -4,9 +4,111 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FoxmindEd_Learning.WPF"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="800" Width="1200">
+    <Window.Resources>
+        <Color x:Key="PC_01">#FFB0BEC5</Color>
+        <Color x:Key="PC_02">#FF000000</Color>
+        <Color x:Key="PC_03">#FFB0BEC5</Color>
+        <SolidColorBrush x:Key="PC_01_Brush" Color="{StaticResource PC_01}"/>
+        <SolidColorBrush x:Key="PC_02_Brush" Color="{StaticResource PC_02}"/>
+        <SolidColorBrush x:Key="PC_03_Brush" Color="{StaticResource PC_03}"/>
 
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Foreground" Value="{StaticResource PC_02_Brush}"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Foreground" Value="{StaticResource PC_02_Brush}"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,4"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Background" Value="{StaticResource PC_01_Brush}"/>
+            <Setter Property="Foreground" Value="{StaticResource PC_02_Brush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PC_03_Brush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border
+            Grid.Row="0"
+            Margin="20, 4" Padding="4"
+            CornerRadius="5"
+            Background="{StaticResource PC_01_Brush}">
+            <TextBlock Text="FoxmindEd example:" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <Grid Grid.Row="1" Margin="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Name="Name_TextBox"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Category:"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Name="Category_TextBox"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Place:"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Name="Place_TextBox"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Date:"/>
+            <DatePicker
+                Grid.Row="3" Grid.Column="1"
+                Margin="5" Padding="10,5" BorderThickness="1"
+                FontSize="16"
+                materialDesign:HintAssist.Hint="Pick Date"
+                Name="Date_DatePicker"
+                Style="{StaticResource MaterialDesignFilledDatePicker}"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Time:"/>
+            <materialDesign:TimePicker
+                Grid.Row="4" Grid.Column="1"
+                Margin="5" Padding="10,5" BorderThickness="1"
+                FontSize="16"
+                materialDesign:HintAssist.Hint="Pick Time"
+                Is24Hours="True" WithSeconds="True"
+                Name="Time_DatePicker"
+                Style="{StaticResource MaterialDesignOutlinedTimePicker}"/>
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="Description:"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Name="Description_TextBox"/>
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="Additional info:"/>
+            <TextBox Grid.Row="6" Grid.Column="1" Name="AdditionalInfo_TextBox"/>
+            <TextBlock Grid.Row="7" Grid.Column="0" Text="Image URL:"/>
+            <TextBox Grid.Row="7" Grid.Column="1" Name="ImageURL_TextBox"/>
+
+            <Button
+                Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                MinHeight="60" MinWidth="240"
+                Content="Submit"
+                Click="SubmitNewEntityObject_Click"/>
+        </Grid>
+
+        <ItemsControl Grid.Row="2" ItemsSource="{Binding ItemsList}">
+        </ItemsControl>
     </Grid>
 </Window>
