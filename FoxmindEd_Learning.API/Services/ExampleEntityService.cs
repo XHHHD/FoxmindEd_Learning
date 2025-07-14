@@ -22,10 +22,6 @@ public class ExampleEntityService(
     public async Task<List<ExampleEntity>> GetAllAsync()
     {
         var entities = await _exampleEntityRepository.GetAllAsync();
-        if (entities == null || entities.Count == 0)
-        {
-            throw new InvalidOperationException("No entities found");
-        }
 
         return entities;
     }
